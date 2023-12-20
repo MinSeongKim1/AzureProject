@@ -69,7 +69,8 @@ def draw_candle_chart_interactive(data, spike_days, max_days, min_days):
                                          open=data['Open'],
                                          high=data['High'],
                                          low=data['Low'],
-                                         close=data['Close'])])
+                                         close=data['Close'],
+                                         width=5)])
 
     fig.add_trace(go.Scatter(x=spike_days.index, y=spike_days['Close'], mode='markers', name='Spike', marker=dict(color='red', size=8)))
     fig.add_trace(go.Scatter(x=max_days.index, y=max_days['Close'], mode='markers', name='6-month High', marker=dict(color='green', size=8)))
