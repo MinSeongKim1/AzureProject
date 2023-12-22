@@ -2,16 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stock Chart Generator</title>
+    <title>Stock Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        input[type=text] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type=submit] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Stock Chart Generator</h1>
+    <h1>주식 정보 조회</h1>
     <form method="POST">
-        <label for="ticker">Enter the ticker symbol:</label>
-        <input type="text" id="ticker" name="ticker" required>
-        <label for="chart_type">Enter the chart type (line, area, candle):</label>
-        <input type="text" id="chart_type" name="chart_type" required>
-        <input type="submit" value="Generate Chart">
+        <label for="ticker">티커를 입력하세요(ex: TSLA / 005930.KS):</label><br>
+        <input type="text" id="ticker" name="ticker" required><br>
+        <label for="chart_type">차트 유형을 선택하세요.(line, area, candle):</label><br>
+        <input type="text" id="chart_type" name="chart_type" required><br>
+        <input type="submit" value="조회">
     </form>
 </body>
 </html>
