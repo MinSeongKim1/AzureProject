@@ -3,9 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Stock Chart</title>
+    <style>
+        .stock-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 두 열로 나누기 */
+            gap: 5px; /* 열 사이 간격 설정 */
+            max-width: 600px; /* 그리드 최대 너비 설정 */
+            margin: auto; /* 중앙 정렬 */
+        }
+        
+        .stock-info-grid > div {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+    </style>
 </head>
 <body>
-    <h1>Stock Chart</h1>
+    <h1>주식 차트</h1>
     {{ chart | safe }}
+
+    <div class="stock-info-grid">
+        <div>
+            <!-- 1열 데이터 -->
+            <p>Previous Close: {{ info['previousClose'] }}</p>
+            <p>Open: {{ info['open'] }}</p>
+            <p>PE Ratio (TTM): {{ info['trailingPE'] }}</p>
+            <p>Day's Range: {{ info['dayLow'] }} - {{ info['dayHigh'] }}</p>
+            <p>52 Week Range: {{ info['fiftyTwoWeekLow'] }} - {{ info['fiftyTwoWeekHigh'] }}</p>
+            <p>Volume: {{ info['volume'] }}</p>
+            <p>Avg. Volume: {{ info['averageVolume'] }}</p>
+            
+
+            
+
+
+        </div>
+        <div>
+            <!-- 2열 데이터 -->
+            <p>Market Cap: {{ info['marketCap'] }}</p>
+            <p>Beta (5Y Monthly): {{ info['beta'] }}</p>
+            <p>EPS: {{ info['trailingEps'] }}</p>
+            <p>Earnings Date: {{ info['earningsDate'] }}</p>
+            <p>Forward Dividend / Yield: {{ info['dividendRate'] }}</p>
+            <p>Ex-Dividend Date: {{ info['exDividendDate'] }}</p>
+            <p>1y Target Est: {{ info['targetMeanPrice'] }}</p>
+        </div>
+    </div>
 </body>
 </html>
