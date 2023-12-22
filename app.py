@@ -85,10 +85,33 @@ def index():
         ticker = request.form.get('ticker')
         chart_type = request.form.get('chart_type')
 
-        data = yf.download(ticker, start='2013-01-01', end='2023-12-13')
+        data = yf.download(ticker, start='2013-01-01', end='2023-12-21')
 
         if data.empty:
             return render_template('index.html', error_message="Invalid ticker. Please try again.")
+        
+        # 주식 정보 추가
+        stock = yf.Ticker(ticker)
+        stock_info = stock.info
+
+        company_name = stock_info.get('longName', 'N/A')
+        previous_close = stock_info.get('previousClose', 'N/A')
+        market_cap = stock_info.get('marketCap', 'N/A')
+        Open = stock_info.get('open', 'N/A')
+        Beta = stock_info.get('beta', 'N/A')
+        pe_ratio = stock_info.get('trailingPE', 'N/A')
+        eps = stock_info.get('trailingEps', 'N/A')  
+        day_Range = f"{stock_info.get('dayLow', 'N/A')} - {stock_info.get('dayHigh', 'N/A')}"  
+        earnings_Date = stock_info.get('earningsDate', 'N/A')  
+        Week_Range = f"{stock_info.get('fiftyTwoWeekLow', 'N/A')} - {stock_info.get('fiftyTwoWeekHigh', 'N/A')}"  
+        forward_Dividend = stock_info.get('dividendRate', 'N/A')
+        volume = stock_info.get('volume', 'N/A')
+        ex_DividendDate = stock_info.get('exDividendDate', 'N/A')
+        average_Volume = stock_info.get('averageVolume', 'N/A')
+        target_MeanPrice = stock_info.get('targetMeanPrice', 'N/A')
+        
+        
+        # print(stock_info)
 
         data = calculate_change(data)
         spike_days = find_spike_days(data)
@@ -103,7 +126,6 @@ def index():
         else:
             return render_template('index.html', error_message="Invalid chart type. Please try again.")
 
-        return render_template('chart.html', chart=chart)
+        return render_template('chart.html', chart=chart , info=stock_info)
     
     return render_template('index.html')
-
